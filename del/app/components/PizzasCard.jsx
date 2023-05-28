@@ -3,18 +3,22 @@ import Link from "next/link"
 
 const PizzasCard = ({ pizza }) => {
 
+  const { _id, title, price, desc, img } = pizza
+
+ 
     return (
         
        <li className="mb-10">
        <div className="flex w-9/12 flex-col items-center justify-center ">
-      <Link href={`/pizzas/${pizza.id}`}>
-            <Image src={pizza.img} width={400} height={300} alt="peperoni pizza" />
+          <Link href={`/pizzas/${_id}`} as={`/pizzas/${_id}`}> 
+            <Image src={img} width={400} height={300} alt="peperoni pizza" />
           
-        </Link>
+        </Link>   
+      
           <div className="border-2 border-yellow-700 w-full flex flex-col items-center justify-center" >
-                  <h2 className=" underline text-xl font-semibold">{pizza.title}</h2>
-                    <p className="ordinal text-lg ">Price:{pizza.prices}€</p>
-                    <p>{ pizza.desc}</p>
+                  <h2 className=" underline text-xl font-semibold">{title}</h2>
+                    <p className="ordinal text-lg ">Price:{price}€</p>
+                    <p>{desc}</p>
        </div>
         </div>
       </li>

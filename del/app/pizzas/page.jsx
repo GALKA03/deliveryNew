@@ -1,25 +1,40 @@
-import PizzasCard from "../components/PizzasCard";
-import { use } from 'react'
 
-
-export const getPizzas = async ()=> {
-    try {
-        let res= await fetch(`http://localhost:3000/api/pizzas`)
-    return res.json()
-    } catch (error) { console.log(error)}
+const PizzaPage = async () => { 
+  const { results:pizzas }= await getPizzas()
+  return (
+    <AllPizzas pizzas={pizzas}/>
+  )
 }
-const PizzasList = async() => {
- let pizzas= await getPizzas()
-//   console.log(pizzas)
-    return (
-    <ul>
-      {pizzas.map((pizza) => (
-        <PizzasCard key={pizza._id} pizza={pizza} />
-      ))}
-    </ul>
-  );
-};
-export default PizzasList;
+export default PizzaPage
+
+
+// import PizzasCard from "../components/PizzasCard";
+// import getPizzasId from "../getLib/getPizzaId";
+
+
+
+// // export async function generateStaticParams() {
+// //   const pizzas = await fetch('http://localhost:3000/api/pizzas/').then((res) => res.json());
+// //   const paths = pizzas.map((pizza) => {
+// //     const { slug } = pizza;
+// //     return { params: { slug } };
+// //   });
+// //   return { paths, fallback: false }
+
+// const PizzasList = async({pizzas}) => {
+//       let pizzas = await getPizzasId()
+
+//     console.log('pizzas page', pizzas)
+// //  console.log(pizzas)
+//     return (
+//     <ul>
+//       {pizzas.map((pizza) => (
+//         <PizzasCard key={pizza._id} pizza={pizza} />
+//       ))}
+//     </ul>
+//   );
+// };
+// export default PizzasList;
 
 
 //  export const getPizzas = async ()=> {
