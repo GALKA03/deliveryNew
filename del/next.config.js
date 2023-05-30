@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+    httpAgentOptions: {
+    keepAlive: false,
+  },
     experimental: { appDir: true, serverComponentsExternalPackages: ["mongoose"] },
     webpack(config) {
         config.experiments = { ...config.experiments, topLevelAwait: true };

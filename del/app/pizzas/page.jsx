@@ -1,40 +1,40 @@
 
-const PizzaPage = async () => { 
-  const { results:pizzas }= await getPizzas()
-  return (
-    <AllPizzas pizzas={pizzas}/>
-  )
-}
-export default PizzaPage
+// const PizzaPage = async () => { 
+//   const { results:pizzas }= await getPizzas()
+//   return (
+//     <AllPizzas pizzas={pizzas}/>
+//   )
+// }
+// export default PizzaPage
 
 
-// import PizzasCard from "../components/PizzasCard";
-// import getPizzasId from "../getLib/getPizzaId";
+import PizzasCard from "../components/PizzasCard";
+import getPizzasId from "../getLib/getPizzas";
 
 
 
-// // export async function generateStaticParams() {
-// //   const pizzas = await fetch('http://localhost:3000/api/pizzas/').then((res) => res.json());
-// //   const paths = pizzas.map((pizza) => {
-// //     const { slug } = pizza;
-// //     return { params: { slug } };
-// //   });
-// //   return { paths, fallback: false }
+// export async function generateStaticParams() {
+//   const pizzas = await fetch('http://localhost:3000/api/pizzas/').then((res) => res.json());
+//   const paths = pizzas.map((pizza) => {
+//     const { slug } = pizza;
+//     return { params: { slug } };
+//   });
+//   return { paths, fallback: false }
+// export const dynamic = 'auto';
+const PizzasList = async() => {
+       let pizzas = await getPizzasId()
 
-// const PizzasList = async({pizzas}) => {
-//       let pizzas = await getPizzasId()
-
-//     console.log('pizzas page', pizzas)
-// //  console.log(pizzas)
-//     return (
-//     <ul>
-//       {pizzas.map((pizza) => (
-//         <PizzasCard key={pizza._id} pizza={pizza} />
-//       ))}
-//     </ul>
-//   );
-// };
-// export default PizzasList;
+    console.log('pizzas page', pizzas)
+//  console.log(pizzas)
+    return (
+    <ul>
+      {pizzas.map((pizza) => (
+        <PizzasCard key={pizza._id} pizza={pizza} />
+      ))}
+    </ul>
+  );
+};
+export default PizzasList;
 
 
 //  export const getPizzas = async ()=> {

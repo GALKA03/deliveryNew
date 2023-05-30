@@ -1,35 +1,45 @@
-
-
+import getNewPizzaId from "../../getLib/getNewPissaId"
+import getPizzas from "@/app/getLib/getPizzas";
 // 'use client'
-// import { Suspense } from 'react';
-
+import { Suspense } from 'react';
 // import Form from '@/app/components/Form';
-//   import CardId from '@/app/components/CardId';
-// import React from 'react';
+   import CardId from '@/app/components/CardId';
+import React from 'react';
+import Form  from "../../components/Form"
+export async function generateStaticParams() {
+  const pizzas = await getPizzas()
+  return pizzas.map((pizza) => ({
+   id: pizza._id
+  }));
+}
 
-//  import getNewPizzaId from "../../api/getNewPissaId"
-    
-// const PizzaId = async ({ params: { id } }) => {
 
-// const pizzaId= getNewPizzaId(id)
-// const pizzaData = await pizzaId;
-//   console.log('new Id pizza', pizzaData)
+const PizzaId = async ({params}) => {
+    const { pizza } = await getNewPizzaId(params.id)
+    // const { pizza } = await getNewPizzaId(pizzaId);
+    // console.log('pizza[id]', pizza)
+    if (!pizza) {
+        notFound()
+    }
+// const pizzaIdGet= getNewPizzaId()
+//  const pizzaData = await pizzaIdGet;
+//     console.log('new Id pizza', pizzaData)
+//      console.log('new Id pizza', pizzaIdGet)
 
 
-//   return (
+    return (
+  <>
+       {/* <button onClick={() => router.back()}>Go Back</button>  */}
+       <Form />
+      <Suspense fallback={<div>Loading...</div>}>
+     
+                <CardId params={{ pizza }}/>
+        </Suspense>
+</>
+  );
+};
 
-//     <>
-//        {/* <button onClick={() => router.back()}>Go Back</button>  */}
-//       <Form />
-//       <Suspense fallback={<div>Loading...</div>}>
-      
-//   <CardId promise={pizzaData}/>
-//         </Suspense>
-//     </>
-//   );
-// };
-
-// export default PizzaId;
+export default PizzaId;
 
 
   

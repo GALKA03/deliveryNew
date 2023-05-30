@@ -5,14 +5,12 @@ export async function GET(request) {
 
   try {
    const { id } = request.query;
-      const pizza = await Pizzas.findById(id);
-      console.log(pizza)
-    if (pizza) {
-      return new Response(JSON.stringify(pizza));
-    }
-
-    return new Response(null, { status: 404 });
-  } catch (error) {
-    return new Response(null, { status: 500 });
+    const pizza = await Pizzas.findOne({ _id: new Object(id) });
+      if(!pizza) await init()
+    console.log(pizza)
+    if (pizza) throw new error
+    return {pizza}
+    }catch (error) {
+    return {error:"failed fetch pizza get"}
   }
 }

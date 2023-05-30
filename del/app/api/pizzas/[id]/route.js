@@ -1,28 +1,45 @@
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
+import dbConnect from "../../../../models/Pizzaz";
+import Pizzas from "@/models/Pizzaz";
 
 
-export async function GET(request) {
-  
-  return NextResponse.json({message:"hello pizza page"})
+export async function GET(request, { params }) {
+   await dbConnect();
+
+  try {
+    const  id  = params.id;
+    console.log('id', id)
+    const pizza = await Pizzas.findOne({ _id: id });
+    // const { searchParams } = request.nextUrl
+    // const sort= searchParams.get("sort")
+// const id= params.id
+    // if (!pizza) {
+    //   throw new Error('Pizza not found');
+    // }
+    return NextResponse.json({  pizza}, { status: 200 });
+
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }
 
 
 
-// export async function PATCH(request,{params}) {
-//     await dbConnect();
-//     try {
-//       const { id } = params
-//       const { pizza, error } = await Pizzas({ id })
-//       if (error) throw new Error(error)
-//       return NextResponse.json({pizza}, {status:200})
-//      } catch(error) {
-//         return NextResponse.json({error: error.message}, {status:500})
-//     }
+export async function PATCH(request,{params}) {
+    await dbConnect();
+    try {
+      const { id } = params
+      const { pizza, error } = await Pizzas({ id })
+      if (error) throw new Error(error)
+      return NextResponse.json({pizza}, {status:200})
+     } catch(error) {
+        return NextResponse.json({error: error.message}, {status:500})
+    }
 // const id= params.id
 //     const { searchParams } = request.next.Url
 //     const sort = searchParams.get('sort')
 //   return NextResponse.json({message:" Hello id", id, sort}, {status: 201})
-// }
+}
 // export async function GET(request) {
 //   await dbConnect();
 

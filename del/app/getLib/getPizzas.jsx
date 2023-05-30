@@ -13,14 +13,14 @@
 // }
 // export default generateStaticParams
 
- const getPizzasId = async ()=> {
+ const getPizzas = async ()=> {
     try {
-        let res= await fetch(`http://localhost:3000/api/pizzas/`)
+        let res= await fetch(`http://localhost:3000/api/pizzas/`,{ cache: 'force-cache' })
         if (!res.ok) {
         throw new Error('failed to fetch data')
     }
       return res.json()
     } catch (error) { console.log(error)}
 }
-export default getPizzasId
+export default getPizzas
 

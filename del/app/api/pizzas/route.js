@@ -3,32 +3,42 @@ import Pizzas from "../../../models/Pizzaz";
 import { NextResponse } from "next/server"
 
 
+
 export async function GET(request) {
-  
-  return NextResponse.json({message:"hello pizza page"})
+  let response;
+
+  try {
+    // Connect to the database
+    await dbConnect();
+
+    // Find all pizzas in the database and return them
+    const  pizzas = await Pizzas.find();
+// if(error) throw new Error(error)
+    return NextResponse.json( pizzas , {status:200})
+  } catch(error) {
+        return NextResponse.json({error: error.message}, {status:500})
+    }
+
 }
 
 // Export the create, read, update, and delete functions
-// export async function POST(request) {
-//   // Connect to the database
-//   await dbConnect();
+export async function POST(request) {
+  // Connect to the database
+  await dbConnect();
 
-//   try {
-//     // Parse the JSON body from the client request
-//     const data = await request.json();
+  try {
+    // Parse the JSON body from the client request
+    const data = await request.json();
 
-//     // Create a new pizza in the database with the given data
-//     const newPizza = new Pizzas(data);
-//     // console.log('pizzas api',newPizza[0])
-//     await newPizza.save();
+    // Create a new pizza in the database with the given data
+    const newPizza = new Pizzas(data);
+    await newPizza.save();
 
-//     // Respond with a 201 Created status code and the new pizza object
-//     return new Response(JSON.stringify(newPizza), { status: 201 });
-//   } catch (error) {
-//     // If there was an error saving the pizza to the database, respond with a 500 Internal Server Error status code
-//     return new Response(null, { status: 500 });
-//   }
-// }
+    return new NextResponse(newPizza, { status: 201 });
+  } catch (error) {
+    return new NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
 
 // export async function GET(request) {
 //   let response;
