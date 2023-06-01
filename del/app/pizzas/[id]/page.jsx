@@ -1,8 +1,8 @@
-import getNewPizzaId from "../../getLib/getNewPissaId"
+import getNewPizzaId from "../../getLib/getNewPizzaId"
 import getPizzas from "@/app/getLib/getPizzas";
-// 'use client'
+
 import { Suspense } from 'react';
-// import Form from '@/app/components/Form';
+
    import CardId from '@/app/components/CardId';
 import React from 'react';
 import Form  from "../../components/Form"

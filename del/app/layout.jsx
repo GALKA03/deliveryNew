@@ -1,9 +1,9 @@
 "use client"
 import './styles/globals.css'
 import { Inter } from 'next/font/google'
-import getNewPizzaId from './getLib/getNewPissaId'
 
-// import { useState, useEffect } from 'react';
+import Header from './components/Header'
+import { Providers } from './redux/Providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -14,25 +14,21 @@ export const metadata = {
 export default function RootLayout({ children}) {
   
   
-  //  const { pizza } = params;
-  //  console.log('pizza', id)
-// const {_id}=pizza
-  // console.log('getNewPizza', getNewPizzaId)
- 
   return (
     <html lang="en">
     
       <body className={inter.className}>
+        <Providers>
         <div className='w-full h-full'>
-          <header />
+          <header><Header/></header>
          <div className='flex justify-around flex-wrap grow py-10'>
-            {/* <aside className='block p-3'><NavShops/></aside> */}
 
             
             {children}
           </div>
           <footer />
         </div>
+        </Providers>
       </body>
     </html>
   )

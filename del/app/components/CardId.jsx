@@ -2,13 +2,14 @@
  'use client';
 import { useState } from "react";
 import Image from "next/image";
-
-
+import { useSelector, useDispatch } from "react-redux";
+import { selectPizzasQuantity } from "../redux/pizzas/pizzaSelector";
 
 const CardId = async ({params}) => {
-     const [quantity, setQuantity] = useState(1);
-  console.log('paramsCard', params)
-
+    //  const [quantity, setQuantity] = useState(1);
+ 
+  const selectQuantity = useSelector(selectPizzasQuantity)
+  const dispatch= useDispatch()
  const { pizza } = params;
 const {title,price, desc, img}=pizza
   
