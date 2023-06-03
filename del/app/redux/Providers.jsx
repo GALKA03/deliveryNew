@@ -4,3 +4,9 @@ import store from './store';
 export function Providers({ children }) {
   return <Provider store={store}>{children}</Provider>;
 }
+// import { Provider } from 'react-redux';
+// import { wrapper } from './store';
+
+// export function Providers({ children }) {
+//   return <Provider store={wrapper.store}>{children}</Provider>;
+// }

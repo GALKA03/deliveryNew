@@ -22,7 +22,23 @@ export async function GET(request, { params }) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+export async function DELETE(request, { params }) {
+  await dbConnect();
 
+  try {
+  const  id  = params.id;
+    console.log('id', id)
+    const pizza = await Pizzas.deleteOne({ _id: id });
+
+    if (pizza) {
+       return NextResponse.json({  pizza}, { status: 204 });
+
+    }    
+    return NextResponse.json(null, { status: 404 });
+  } catch (error) {
+    return new Response(null, { status: 500 });
+  }
+}
 
 
 export async function PATCH(request,{params}) {
@@ -75,20 +91,3 @@ export async function PUT(request) {
   }
 }
 
-export async function DELETE(request) {
-  await dbConnect();
-
-  try {
-    const data = await request.json();
-
-    const deletedPizza = await Pizzas.findByIdAndDelete(data.id);
-
-    if (deletedPizza) {
-      return new Response(null, { status: 204 });
-    }
-
-    return new Response(null, { status: 404 });
-  } catch (error) {
-    return new Response(null, { status: 500 });
-  }
-}

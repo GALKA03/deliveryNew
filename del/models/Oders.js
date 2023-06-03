@@ -7,20 +7,20 @@ const OderSchema = new Schema({
   name:{
     type: String
   },
-  email: {
-    type: String,
-    required: [true, "Email is required"],
-    unique: true,
-  },
-  phone: {
-    type: Number,
- required: [true, "Number is required"],
-  },
+//   email: {
+//     type: String,
+//     required: [true, "Email is required"],
+//     unique: true,
+//   },
+//   phone: {
+//     type: Number,
+//  required: [true, "Number is required"],
+//   },
   address: {
     String,
     required: [true, "Address is required"],
   },
-  total: {
+   total: {
     Number,
     required: [true, "Total is required"]
   },

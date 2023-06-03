@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 
    import CardId from '@/app/components/CardId';
 import React from 'react';
-import Form  from "../../components/Form"
+// import Form  from "../../components/Form"
 export async function generateStaticParams() {
   const pizzas = await getPizzas()
   return pizzas.map((pizza) => ({
@@ -21,16 +21,12 @@ const PizzaId = async ({params}) => {
     if (!pizza) {
         notFound()
     }
-// const pizzaIdGet= getNewPizzaId()
-//  const pizzaData = await pizzaIdGet;
-//     console.log('new Id pizza', pizzaData)
-//      console.log('new Id pizza', pizzaIdGet)
 
 
     return (
   <>
        {/* <button onClick={() => router.back()}>Go Back</button>  */}
-       <Form />
+       {/* <Form /> */}
       <Suspense fallback={<div>Loading...</div>}>
      
                 <CardId params={{ pizza }}/>
